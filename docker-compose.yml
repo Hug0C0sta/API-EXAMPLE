@@ -1,0 +1,29 @@
+services:
+  db:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: db-postgres
+      PGDATA: /data/postgres
+    volumes:
+      - db:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - db
+    restart: unless-stopped
+#  java-api:
+#    build: .
+#    env_file:
+#      - .env
+#    ports:
+#      - "3000:8080"
+
+networks:
+  db:
+    driver: bridge
+
+volumes:
+  db:
